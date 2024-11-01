@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { initFlowbite } from 'flowbite';
-import { LoginComponent } from "./+component/login/login.component";
+import { SignupComponent } from "./+component/signup/ui/signup.component";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, LoginComponent],
+  imports: [RouterOutlet, SignupComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
