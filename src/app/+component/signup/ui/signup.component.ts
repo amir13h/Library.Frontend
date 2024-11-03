@@ -28,12 +28,12 @@ export class SignupComponent implements OnInit {
     if (this.signup.email != '' && this.signup.password != '' && this.signup.phone != '') {
       this.http.post('http://localhost:5026/usernameandpassword/add', this.signup).subscribe(res => {
         this.data = res as any[];
-      })
+        this.router.navigateByUrl('/admin')
+      });
     }
     else{
        this.message='فیلد های بالا را کامل کنید'
      }
-     this.router.navigateByUrl('/')
   }
 
 }

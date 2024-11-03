@@ -1,0 +1,265 @@
+<nav class="bg-white border-gray-200 rounded-3xl dark:bg-gray-900" dir="rtl">
+    <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+        <div class="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
+            <button routerLink="/login" type="button"
+                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">ثبت
+                نام</button>
+            <button data-collapse-toggle="navbar-cta" type="button"
+                class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+                aria-controls="navbar-cta" aria-expanded="false">
+                <span class="sr-only">باز کردن منوی اصلی</span>
+                <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                    viewBox="0 0 17 14">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M1 1h15M1 7h15M1 13h15" />
+                </svg>
+            </button>
+        </div>
+        <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-cta">
+            <ul
+                class="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+                <li>
+                    <a class="block py-2 px-3 md:p-0 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:dark:text-blue-500"
+                        aria-current="page">خانه</a>
+                </li>
+                <li>
+                    <a (click)="clickMember()"
+                        class="block py-2 px-3 md:p-0 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">عضوها</a>
+                </li>
+                <li>
+                    <a (click)="clickBook()"
+                        class="block py-2 px-3 md:p-0 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">کتاب
+                        ها</a>
+                </li>
+                <li>
+                    <a (click)="clickPas()"
+                        class="block py-2 px-3 md:p-0 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">اطلاعات
+                        حساب کاربران</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<hr class="mb-3">
+@if (edit=='') {
+@if (check=='pas') {
+<h1 class="text-3xl mb-3">اطلاعات حساب کاربران</h1>
+<button routerLink="/signup" type="button" class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">اضافه کردن</button>
+<div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+    <table class="w-full text-sm text-right text-gray-500 dark:text-gray-400">
+        <thead
+            class="text-xs text-gray-700 uppercase bg-gradient-to-r from-blue-500 to-blue-700 text-white dark:bg-gray-700 dark:text-gray-400">
+            <tr>
+                <th scope="col" class="px-6 py-3">
+                    Id
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    ایمیل
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    پسورد
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    شماره تلفن
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (item of pasData; track $index) {
+            <tr
+                class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors duration-200">
+                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                    {{item.id}}
+                </th>
+                <td class="px-6 py-4">
+                    {{item.email}}
+                </td>
+                <td class="px-6 py-4">
+                    {{item.password}}
+                </td>
+                <td class="px-6 py-4 text-green-600 font-semibold">
+                    {{item.phone}}
+                </td>
+                <td>
+                    <button (click)="editClick(item)" type="button" class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mt-3 mb-2 ">ویرایش</button>
+                    <button (click)="removePas(item)" type="button"
+                    class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 ">حذف</button>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>
+}
+@if (check=='book') {
+<h1 class="text-3xl mb-3">لیست تمام کتاب ها</h1>
+<button (click)="addBook()" type="button" class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">اضافه کردن</button>
+<div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+    <table class="w-full text-sm text-right text-gray-500 dark:text-gray-400">
+        <thead
+            class="text-xs text-gray-700 uppercase bg-gradient-to-r from-blue-500 to-blue-700 text-white dark:bg-gray-700 dark:text-gray-400">
+            <tr>
+                <th scope="col" class="px-6 py-3">
+                    Id
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    نام کتاب
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    تعداد صفحات
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    قیمت
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (item of bookData; track $index) {
+            <tr
+                class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors duration-200">
+                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                    {{item.id}}
+                </th>
+                <td class="px-6 py-4">
+                    {{item.title}}
+                </td>
+                <td class="px-6 py-4">
+                    {{item.pages}}
+                </td>
+                <td class="px-6 py-4 text-green-600 font-semibold">
+                    {{item.price}}
+                </td>
+                <td>
+                    <button (click)="editBook(item)" type="button"
+                        class="text-white mt-3 bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 ">ویرایش</button>
+                    <button (click)="removeBook(item)" type="button"
+                        class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 ">حذف</button>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>
+}
+@if (check=='member') {
+<h1 class="text-3xl mb-3">لیست تمام عضوها</h1>
+<button (click)="addMember()" type="button" class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">اضافه کردن</button>
+<div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+    <table class="w-full text-sm text-right text-gray-500 dark:text-gray-400">
+        <thead
+            class="text-xs text-gray-700 uppercase bg-gradient-to-r from-blue-500 to-blue-700 text-white dark:bg-gray-700 dark:text-gray-400">
+            <tr>
+                <th scope="col" class="px-6 py-3">
+                    Id
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    نام و نام خانوادگی
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    سن
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    شماره تلفن
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (item of memberData; track $index) {
+            <tr
+                class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors duration-200">
+                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                    {{item.id}}
+                </th>
+                <td class="px-6 py-4">
+                    {{item.name}}
+                </td>
+                <td class="px-6 py-4">
+                    {{item.age}}
+                </td>
+                <td class="px-6 py-4 text-green-600 font-semibold">
+                    {{item.phone}}
+                </td>
+                <td>
+                    <button (click)="editMember(item)" type="button"
+                        class="text-white mt-3 bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 ">ویرایش</button>
+                    <button (click)="removeMember(item)" type="button"
+                        class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 ">حذف</button>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>
+}
+}
+@else if(edit=='pas') {
+    <form class="max-w-md mx-auto text-right rtl mt-36 bg-white p-6 rounded-lg shadow-lg">
+        <div class="relative z-0 w-full mb-5 group">
+            <input [(ngModel)]="pas.email" type="email" name="floating_email" id="floating_email" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer placeholder-gray-400" placeholder=" " required />
+            <label for="floating_email" class="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:right-0 rtl:peer-focus:right-0 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">آدرس ایمیل</label>
+        </div>
+        <div class="relative z-0 w-full mb-5 group">
+            <input [(ngModel)]="pas.password" type="password" name="floating_password" id="floating_password" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer placeholder-gray-400" placeholder=" " required />
+            <label for="floating_password" class="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:right-0 rtl:peer-focus:right-0 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">پسورد</label>
+        </div>
+        <div class="relative z-0 w-full mb-5 group">
+            <input [(ngModel)]="pas.phone" type="tel" name="repeat_password" id="floating_repeat_password" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer placeholder-gray-400" placeholder=" " required />
+            <label for="floating_repeat_password" class="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:right-0 rtl:peer-focus:right-0 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">شماره تلفن</label>
+        </div>
+        <button (click)="update()" type="submit" class="text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center transition duration-200">ارسال</button>
+        <button (click)="exit()" type="submit" class="text-white bg-blue-600 mr-4 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center transition duration-200">بازگشت</button>
+    </form>
+    
+}
+@else if(edit=='book'||edit=='addBook') {
+    <form class="max-w-md mx-auto text-right rtl mt-36 bg-white p-6 rounded-lg shadow-lg">
+        <div class="relative z-0 w-full mb-5 group">
+            <input [(ngModel)]="book.title" type="text" name="floating_email" id="floating_email" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer placeholder-gray-400" placeholder=" " required />
+            <label for="floating_email" class="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:right-0 rtl:peer-focus:right-0 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">نام کتاب</label>
+        </div>
+        <div class="relative z-0 w-full mb-5 group">
+            <input [(ngModel)]="book.pages" type="number" name="floating_password" id="floating_password" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer placeholder-gray-400" placeholder=" " required />
+            <label for="floating_password" class="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:right-0 rtl:peer-focus:right-0 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">تعداد صفحات</label>
+        </div>
+        <div class="relative z-0 w-full mb-5 group">
+            <input [(ngModel)]="book.price" type="number" name="repeat_password" id="floating_repeat_password" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer placeholder-gray-400" placeholder=" " required />
+            <label for="floating_repeat_password" class="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:right-0 rtl:peer-focus:right-0 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">قیمت</label>
+        </div>
+        @if (edit=='addBook') {
+            <button (click)="addBooks()" type="submit" class="text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center transition duration-200">ارسال</button>
+        }
+        @else {
+            <button (click)="updateBook()" type="submit" class="text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center transition duration-200">ارسال</button>
+        }
+            <button (click)="exit()" type="submit" class="text-white bg-blue-600 mr-4 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center transition duration-200">بازگشت</button>
+    </form>
+    
+}
+@else if(edit=='member'||edit=='addMember') {
+    <form class="max-w-md mx-auto text-right rtl mt-36 bg-white p-6 rounded-lg shadow-lg">
+        <div class="relative z-0 w-full mb-5 group">
+            <input [(ngModel)]="member.name" type="text" name="floating_email" id="floating_email" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer placeholder-gray-400" placeholder=" " required />
+            <label for="floating_email" class="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:right-0 rtl:peer-focus:right-0 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">نام و نام خانوادگی</label>
+        </div>
+        <div class="relative z-0 w-full mb-5 group">
+            <input [(ngModel)]="member.age" type="number" name="floating_password" id="floating_password" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer placeholder-gray-400" placeholder=" " required />
+            <label for="floating_password" class="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:right-0 rtl:peer-focus:right-0 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">سن</label>
+        </div>
+        <div class="relative z-0 w-full mb-5 group">
+            <input [(ngModel)]="member.phone" type="tel" name="repeat_password" id="floating_repeat_password" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer placeholder-gray-400" placeholder=" " required />
+            <label for="floating_repeat_password" class="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:right-0 rtl:peer-focus:right-0 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">شماره تلفن</label>
+        </div>
+        @if (edit=='addMember') {
+            <button (click)="addMembers()" type="submit" class="text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center transition duration-200">ارسال</button>
+        }
+        @else {
+            <button (click)="updateMember()" type="submit" class="text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center transition duration-200">ارسال</button>
+        }
+        <button (click)="exit()" type="submit" class="text-white bg-blue-600 mr-4 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center transition duration-200">بازگشت</button>
+    </form>
+    
+}
